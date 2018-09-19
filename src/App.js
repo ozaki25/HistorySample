@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import HistoryItem from './components/HistoryItem';
 import { defaultHistories } from './data';
 
 const styles = StyleSheet.create({
@@ -20,10 +21,14 @@ export default class App extends Component {
   }
 
   render() {
+    console.log(this.state.histories);
     return (
       <View style={styles.container}>
-        <Text>Welcome to React Native!</Text>
-        <Text>{JSON.stringify(this.state.histories)}</Text>
+        <FlatList
+          data={this.state.histories}
+          keyExtractor={(_, index) => index}
+          renderItem={({ item }) => <HistoryItem history={item} />}
+        />
       </View>
     );
   }
